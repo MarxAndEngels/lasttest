@@ -1,0 +1,104 @@
+version: '3.7'
+
+networks:
+  app-net:
+    driver: bridge
+
+services:
+
+#========APP========#
+  app: &app-template
+    user: ${USERNAME}
+    container_name: api_app2
+    environment:
+      - USERNAME = ${USERNAME}
+    build:
+      context: .
+      dockerfile: ./_docker/app/Dockerfile
+      args:
+        HOST_UID: ${HOST_UID}
+        HOST_GID: ${HOST_GID}
+    volumes:
+      - ./:/var/www/html
+    tty: true
+    depends_on:
+      - redis
+      - db
+    networks:
+      - app-net
+
+  #========WORKER========#
+  worker:
+    <<: *app-template
+    user: root
+    container_name: api_worker
+    command: /usr/bin/supervisord -n -c /etc/supervisor/supervisor.conf
+    networks:
+      - app-net
+
+
+  #========NGINX========#
+  nginx:
+    image: nginx:latest
+    container_name: api_nginx
+    volumes:
+      - ./:/var/www/html
+      - ./_docker/nginx/dev/conf.d:/etc/nginx/conf.d
+      - ./_docker/logs/nginx:/var/log/nginx
+      - ./_docker/php:/usr/local/etc/php/conf.d
+    restart: on-failure
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+    networks:
+      - app-net
+
+
+
+
+  #========MYSQL========#
+  db:
+    image: mysql:8.0.33
+    container_name: api_db
+    restart: always
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "8003:3306"
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
+    networks:
+      - app-net
+
+  #========REDIS========#
+  redis:
+    image: redis:latest
+    container_name: api_redis
+    volumes:
+      - redis:/data
+    ports:
+      - "6382:6379"
+    networks:
+      - app-net
+
+  #========ADMINER========#
+  adminer:
+    image: adminer:latest
+    container_name: api_adminer
+    restart: on-failure
+    ports:
+      - "8923:8080"
+    networks:
+      - app-net
+
+#========VOLUMES========#
+volumes:
+  mysql:
+    driver: "local"
+  redis:
+    driver: "local"
