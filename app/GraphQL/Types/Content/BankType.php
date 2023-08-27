@@ -31,34 +31,6 @@ final class BankType extends GraphQLType
 
       Field::make(AttributeName::LICENSE_TITLE)
         ->type(Type::string()),
-
-      Field::make(AttributeName::LICENSE_FILE)
-        ->isNotSelectable()
-        ->type(Type::string()),
-
-      Field::make(AttributeName::REQUEST)
-        ->type(Type::int()),
-
-      Field::make(AttributeName::APPROVAL)
-        ->type(Type::int()),
-
-      Field::make(AttributeName::RATING)
-        ->type(Type::float()),
-
-      Field::make(AttributeName::RATE)
-        ->type(Type::float()),
-
-      Field::make(AttributeName::IMAGE)
-        ->isNotSelectable()
-        ->type(Type::string()),
-
-      Field::make(AttributeName::IMAGE_CAR)
-        ->isNotSelectable()
-        ->type(GraphQL::type(BankImageCarItemType::class)),
-
-      Field::make(AttributeName::SITE_TEXT)
-        ->isNotSelectable()
-        ->type(GraphQL::type(SiteTextType::class))
     ];
   }
 }

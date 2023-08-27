@@ -58,8 +58,8 @@ class MakeMenu
       MenuSection::make('Digest', [
         MenuGroup::make('CRM', [
           MenuItem::resource(Feedback::class),
-          MenuItem::resource(FeedbackMegaCrm::class)
-            ->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::ROOT)),
+          MenuItem::resource(FeedbackMegaCrm::class),
+            // ->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::ROOT)),
           MenuItem::resource(Dealer::class),
           MenuItem::resource(Site::class),
         ]),
@@ -70,35 +70,36 @@ class MakeMenu
           MenuItem::resource(Region::class),
           MenuItem::resource(Set::class),
         ])
-      ])->icon('light-bulb')->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::AD))->collapsable(),
+      ])->icon('light-bulb'),
+      // ->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::AD))->collapsable(),
 
 
       MenuSection::make('Collaborators', [
         MenuItem::resource(Permission::class),
         MenuItem::resource(User::class),
-        MenuItem::link(__('nova-spatie-permissions::lang.sidebar_label_roles'), 'resources/roles')
-          ->canSee(fn($request) => $request->user()->can(RoleConstants::ROOT)),
-        MenuItem::link(__('nova-spatie-permissions::lang.sidebar_label_permissions'), 'resources/permissions')
-          ->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::ROOT))
+        MenuItem::link(__('nova-spatie-permissions::lang.sidebar_label_roles'), 'resources/roles'),
+          // ->canSee(fn($request) => $request->user()->can(RoleConstants::ROOT)),
+        MenuItem::link(__('nova-spatie-permissions::lang.sidebar_label_permissions'), 'resources/permissions'),
+          // ->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::ROOT))
       ])->icon('key')->collapsable(),
 
       MenuSection::resource(SiteSetting::class)
-        ->icon('cog')
-        ->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::AD)),
+        ->icon('cog'),
+        // ->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::AD)),
 
       MenuSection::resource(Domain::class)
-        ->icon('globe')
-        ->canSee(fn(NovaRequest $request) => $request->user()->can(DomainPermission::VIEW)),
+        ->icon('globe'),
+        // ->canSee(fn(NovaRequest $request) => $request->user()->can(DomainPermission::VIEW)),
 
       MenuSection::make('Logs')
-        ->path('/logs')->icon('document')
-        ->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::ROOT)),
+        ->path('/logs')->icon('document'),
+        // ->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::ROOT)),
 
-      MenuItem::externalLink('GraphiQL', '/graphiql')
-        ->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::ADMIN)),
+      MenuItem::externalLink('GraphiQL', '/graphiql'),
+        // ->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::ADMIN)),
 
-      MenuItem::externalLink('Horizon', '/horizon')
-        ->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::ROOT))
+      MenuItem::externalLink('Horizon', '/horizon'),
+        // ->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::ROOT))
     ];
   }
 

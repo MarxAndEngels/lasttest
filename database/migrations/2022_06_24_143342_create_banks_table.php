@@ -20,13 +20,7 @@ return new class extends Migration {
       $table->string(AttributeName::TITLE)->nullable();
       $table->string(AttributeName::SLUG)->unique();
       $table->string(AttributeName::LICENSE_TITLE, 50)->nullable();
-      $table->unsignedSmallInteger(AttributeName::REQUEST, false)->index();
-      $table->unsignedSmallInteger(AttributeName::APPROVAL, false)->index();
-      $table->unsignedFloat(AttributeName::RATE, 2, 2)->index();
-      $table->unsignedFloat(AttributeName::RATING, 2, 2)->index();
       $table->boolean(AttributeName::IS_ACTIVE)->default(0)->index();
-      $table->index([AttributeName::RATING, AttributeName::IS_ACTIVE]);
-      $table->index([AttributeName::SLUG, AttributeName::IS_ACTIVE]);
     });
   }
 
