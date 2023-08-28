@@ -16,7 +16,7 @@ return new class extends Migration
       Schema::create('dealers', function (Blueprint $table) {
         $table->id();
         $table->string('title', '40');
-        $table->string('slug', '40')->unique();
+        $table->string('slug', '40');
         $table->string('city', '40')->nullable();
         $table->foreignId('user_id')
           ->index()

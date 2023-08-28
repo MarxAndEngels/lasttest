@@ -43,28 +43,28 @@ class User extends Resource
         ->creationRules('required', Rules\Password::defaults())
         ->updateRules('nullable', Rules\Password::defaults()),
       HasMany::make('Dealer'),
-//      MorphToMany::make('Roles', 'roles', \Itsmejoshua\Novaspatiepermissions\Role::class),
-//      MorphToMany::make('Permissions', 'permissions', \Itsmejoshua\Novaspatiepermissions\Permission::class),
+     MorphToMany::make('Roles', 'roles', \Itsmejoshua\Novaspatiepermissions\Role::class),
+     MorphToMany::make('Permissions', 'permissions', \Itsmejoshua\Novaspatiepermissions\Permission::class),
     ];
   }
 
-//  public function cards(NovaRequest $request): array
-//  {
-//    return true;
-//  }
-//
-//  public function filters(NovaRequest $request): array
-//  {
-//    return true;
-//  }
-//
-//  public function lenses(NovaRequest $request): array
-//  {
-//    return true;
-//  }
-//
-//  public function actions(NovaRequest $request): array
-//  {
-//    return true;
-//  }
+ public function cards(NovaRequest $request): array
+ {
+   return true;
+ }
+
+ public function filters(NovaRequest $request): array
+ {
+   return true;
+ }
+
+ public function lenses(NovaRequest $request): array
+ {
+   return true;
+ }
+
+ public function actions(NovaRequest $request): array
+ {
+   return true;
+ }
 }

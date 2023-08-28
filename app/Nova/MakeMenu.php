@@ -50,13 +50,13 @@ class MakeMenu
 //      // ->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::AD))->collapsable(),
 //
 //
-//      MenuSection::make('Collaborators', [
-//        MenuItem::resource(User::class),
-//        MenuItem::link(__('nova-spatie-permissions::lang.sidebar_label_roles'), 'resources/roles'),
-//          // ->canSee(fn($request) => $request->user()->can(RoleConstants::ROOT)),
-//        MenuItem::link(__('nova-spatie-permissions::lang.sidebar_label_permissions'), 'resources/permissions'),
-//          // ->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::ROOT))
-//      ])->icon('key')->collapsable(),
+    //  MenuSection::make('Collaborators', [
+    //    MenuItem::resource(User::class),
+    //    MenuItem::link(__('nova-spatie-permissions::lang.sidebar_label_roles'), 'resources/roles')
+    //      ->canSee(fn($request) => $request->user()->can(RoleConstants::ROOT)),
+    //    MenuItem::link(__('nova-spatie-permissions::lang.sidebar_label_permissions'), 'resources/permissions')
+    //      ->canSee(fn(NovaRequest $request) => $request->user()->can(RoleConstants::ROOT))
+    //  ])->icon('key')->collapsable(),
 //
 ////      MenuSection::resource(SiteSetting::class)
 ////        ->icon('cog'),

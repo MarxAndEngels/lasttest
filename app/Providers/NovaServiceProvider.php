@@ -91,13 +91,14 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
    */
   public function tools()
   {
-    return [
-//      Novaspatiepermissions::make(),
-//      (new \Stepanenko3\LogsTool\LogsTool())
-//        ->canSee(fn(Request $request) => $request->user()->isRoot())
-//        ->canDownload(fn(Request $request) => $request->user()->isRoot())
-//        ->canDelete(fn(Request $request) => $request->user()->isRoot()),
-    ];
+
+    // return [
+    //  Novaspatiepermissions::make(),
+    //  (new \Stepanenko3\LogsTool\LogsTool())
+    //    ->canSee(fn(Request $request) => $request->user()->isRoot())
+    //    ->canDownload(fn(Request $request) => $request->user()->isRoot())
+    //    ->canDelete(fn(Request $request) => $request->user()->isRoot()),
+    // ];
   }
 
   /**

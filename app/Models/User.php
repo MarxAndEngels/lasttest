@@ -43,14 +43,17 @@ class User extends Authenticatable
     return $this->hasMany(Dealer::class, 'user_id', 'id');
   }
 
-//  public function isRoot(): bool
-//  {
-//    return $this->can(RoleConstants::ROOT);
-//  }
-//
-//  public function isAdmin(): bool
-//  {
-//    return $this->can(RoleConstants::ADMIN);
-//  }
+ public function isRoot(): bool
+ {
+   return $this->can(RoleConstants::ROOT);
+  //  true;
+ }
+
+ public function isAdmin(): bool
+ {
+   return $this->can(RoleConstants::ADMIN);
+  //  true;
+
+ }
 
 }
