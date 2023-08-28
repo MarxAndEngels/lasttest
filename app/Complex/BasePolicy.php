@@ -11,9 +11,9 @@ abstract class BasePolicy
 
   public function before(User $user): ?bool
   {
-    if ($user->isRoot()) {
+//    if ($user->isRoot()) {
       return true;
-    }
-    return null;
+//    }
+//    return null;
   }
 }

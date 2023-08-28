@@ -10,23 +10,23 @@ class DealerPolicy extends BasePolicy
 {
   public function view(User $user): bool
   {
-    return $user->can(DealerPermission::VIEW);
+    return true;
   }
 
   public function viewAny(User $user): bool
   {
-    return $user->can(DealerPermission::VIEW);
+    return true;
   }
   public function create(User $user): bool
   {
-    return $user->can(DealerPermission::CREATE);
+    return true;
   }
   public function update(User $user): bool
   {
-    return $user->can(DealerPermission::EDIT);
+    return true;
   }
   public function delete(User $user): bool
   {
-    return $user->can(DealerPermission::CREATE);
+    return true;
   }
 }

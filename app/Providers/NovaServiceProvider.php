@@ -9,6 +9,7 @@ use App\Models\SeoTag;
 use App\Models\Site;
 use App\Models\SiteSetting;
 use App\Models\User;
+use App\Nova\Dashboards\Main;
 use App\Nova\MakeMenu;
 use App\Observers\BankObserver;
 use App\Observers\DealerObserver;
@@ -18,6 +19,8 @@ use App\Observers\SiteSettingObserver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Itsmejoshua\Novaspatiepermissions\Novaspatiepermissions;
+use Laravel\Nova\Menu\MenuItem;
+use Laravel\Nova\Menu\MenuSection;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
 
@@ -31,15 +34,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
   public function boot()
   {
     parent::boot();
-
     Nova::mainMenu(function (Request $request) {
       return (new MakeMenu($request))->getMenu();
     });
-    Bank::observe(BankObserver::class);
-    Dealer::observe(DealerObserver::class);
-    SiteSetting::observe(SiteSettingObserver::class);
-    SeoTag::observe(SeoTagObserver::class);
-    Site::observe(SiteObserver::class);
+    Nova::footer(function ($request){
+       return '';
+    });
   }
 
   /**
@@ -64,7 +64,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
    */
   protected function gate()
   {
-    Gate::define('viewNova', fn(User $user) => $user->can(RoleConstants::MANAGER));
+//    Gate::define('viewNova', fn(User $user) => $user->can(RoleConstants::MANAGER));
+    Gate::define('viewNova', function($user) {
+      return in_array($user->email, []);
+    }
+
+    );
   }
 
   /**
@@ -87,11 +92,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
   public function tools()
   {
     return [
-      Novaspatiepermissions::make(),
-      (new \Stepanenko3\LogsTool\LogsTool())
-        ->canSee(fn(Request $request) => $request->user()->isRoot())
-        ->canDownload(fn(Request $request) => $request->user()->isRoot())
-        ->canDelete(fn(Request $request) => $request->user()->isRoot()),
+//      Novaspatiepermissions::make(),
+//      (new \Stepanenko3\LogsTool\LogsTool())
+//        ->canSee(fn(Request $request) => $request->user()->isRoot())
+//        ->canDownload(fn(Request $request) => $request->user()->isRoot())
+//        ->canDelete(fn(Request $request) => $request->user()->isRoot()),
     ];
   }
 
@@ -103,5 +108,16 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
   public function register()
   {
     //
+  }
+
+  private function getCostumMenu(){
+    Nova::mainMenu(function (Request $request){
+    return [
+      MenuSection::dashboard(Main::class),
+      MenuSection::make('Content', [
+        MenuItem::resource(\App\Nova\Dealer::class),
+      ])->icon('document-text')->collapsable(),
+    ];
+    });
   }
 }

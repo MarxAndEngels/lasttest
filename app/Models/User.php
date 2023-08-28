@@ -39,14 +39,18 @@ class User extends Authenticatable
     'email_verified_at' => 'datetime',
   ];
 
-  public function isRoot(): bool
-  {
-    return $this->can(RoleConstants::ROOT);
+  public function dealer(){
+    return $this->hasMany(Dealer::class, 'user_id', 'id');
   }
 
-  public function isAdmin(): bool
-  {
-    return $this->can(RoleConstants::ADMIN);
-  }
+//  public function isRoot(): bool
+//  {
+//    return $this->can(RoleConstants::ROOT);
+//  }
+//
+//  public function isAdmin(): bool
+//  {
+//    return $this->can(RoleConstants::ADMIN);
+//  }
 
 }

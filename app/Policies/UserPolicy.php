@@ -10,22 +10,23 @@ class UserPolicy extends BasePolicy
 {
   public function view(User $user): bool
   {
-    return $user->can(UserPermission::VIEW);
+//    return $user->can(UserPermission::VIEW);
+    return true;
   }
   public function viewAny(User $user): bool
   {
-    return $user->can(UserPermission::VIEW);
+    return true;
   }
   public function create(User $user): bool
   {
-    return $user->can(UserPermission::EDIT);
+    return true;
   }
   public function update(User $user): bool
   {
-    return $user->can(UserPermission::EDIT);
+    return true;
   }
   public function delete(User $user): bool
   {
-    return $user->can(UserPermission::EDIT);
+    return true;
   }
 }

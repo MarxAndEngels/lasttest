@@ -21,12 +21,6 @@ return new class extends Migration {
 
       $table->json(AttributeName::FILTER)->nullable();
 
-      $table->foreignId(AttributeName::SITE_ID)
-        ->index()
-        ->constrained(TableConstants::SITES)
-        ->cascadeOnUpdate()
-        ->cascadeOnDelete();
-
       $table->dateTime(AttributeName::DOWNLOAD_AT)->nullable();
 
       $table->boolean(AttributeName::GENERATE_FILE)->default(false);
@@ -35,8 +29,6 @@ return new class extends Migration {
       $table->boolean(AttributeName::FEED_VK_XML)->default(false);
       $table->dateTime(AttributeName::GENERATE_FILE_AT)->nullable();
       $table->timestamps();
-
-      $table->unique([AttributeName::SITE_ID, AttributeName::NAME]);
     });
   }
 

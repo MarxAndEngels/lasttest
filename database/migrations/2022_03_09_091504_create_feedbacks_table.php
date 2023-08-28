@@ -52,17 +52,6 @@ return new class extends Migration
       $table->enum(AttributeName::TYPE_ENUM, FeedbackEnum::TYPE_ENUM);
       $table->enum(AttributeName::STATUS_ENUM, FeedbackEnum::STATUS_ENUM);
 
-      $table->foreignId(AttributeName::SITE_ID)
-        ->index()
-        ->constrained(TableConstants::SITES)
-        ->cascadeOnUpdate()
-        ->restrictOnDelete();
-      $table->foreignId(AttributeName::CLIENT_REGION_ID)
-        ->nullable()
-        ->constrained(TableConstants::REGIONS)
-        ->cascadeOnUpdate()
-        ->restrictOnDelete();
-
       $table->timestamps();
     });
   }
