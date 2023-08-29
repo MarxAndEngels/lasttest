@@ -16,8 +16,10 @@ use App\Http\Controllers\FeedController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get("/test", \App\Http\Controllers\DealerController::class);
 Route::get('/', function(){
+  $user = \Illuminate\Support\Facades\Auth::user();
+//  $user->assignRole('admin');
   return view('welcome');
   abort(403);
 })->name('home');

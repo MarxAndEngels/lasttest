@@ -5,11 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SiteFeed extends Model
+class Role extends Model
 {
     use HasFactory;
-
-  protected $table = 'site_feed';
-  protected $guarded = false;
+  protected $table = 'roles';
+  protected $guarded = [];
   public $timestamps = true;
+
+  protected $attributes = [
+    'guard_name' => 'web',
+  ];
+
 }

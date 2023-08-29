@@ -26,11 +26,13 @@ class User extends Resource
     return [
       ID::make()->sortable(),
 
-//      Gravatar::make()->maxWidth(50),
+      Gravatar::make()->maxWidth(50),
 
       Text::make('Name')
         ->sortable()
-        ->rules('required', 'max:255'),
+        ->rules('required', 'max:255')
+        ->creationRules('unique:users,name')
+        ->updateRules('unique:users,name,{{resourceId}}'),
 
       Text::make('Email')
         ->sortable()
@@ -50,21 +52,21 @@ class User extends Resource
 
  public function cards(NovaRequest $request): array
  {
-   return true;
+   return [];
  }
 
  public function filters(NovaRequest $request): array
  {
-   return true;
+   return [];
  }
 
  public function lenses(NovaRequest $request): array
  {
-   return true;
+   return [];
  }
 
  public function actions(NovaRequest $request): array
  {
-   return true;
+   return [];
  }
 }

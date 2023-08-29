@@ -13,9 +13,9 @@ class Site extends Model
   protected $guarded = [];
   public $timestamps = false;
 
-  protected $fillable = [
-    'favicon_image',
-  ];
+//  protected $fillable = [
+//    'favicon_image',
+//  ];
 
   public function dealer(): BelongsTo{
     return $this->belongsTo(Dealer::class);
@@ -26,7 +26,7 @@ class Site extends Model
   public function user(){
     return $this->belongsTo(User::class);
   }
-  public function feed(){
-    return $this->belongsToMany(Feed::class, 'site_feed', 'site_id', 'feed_id');
-  }
+//  public function feed(){
+//    return $this->belongsToMany(Feed::class, 'site_feed', 'site_id', 'feed_id');
+//  }
 }

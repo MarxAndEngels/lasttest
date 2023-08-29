@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Nova;
+use App\Nova\Content\ModelHasRole;
+use App\Nova\Content\Role;
 use App\Nova\Content\Dealer;
 use App\Nova\Content\Feed;
 use App\Nova\Content\Site;
@@ -27,6 +29,8 @@ class MakeMenu
       MenuSection::make('Content', [
 //        MenuItem::make('allcontent','resources/dealers'),
         MenuItem::resource(User::class),
+        MenuItem::resource(Role::class),
+        MenuItem::resource(ModelHasRole::class),
         MenuItem::resource(Dealer::class),
         MenuItem::resource(Site::class),
         MenuItem::resource(Feed::class),

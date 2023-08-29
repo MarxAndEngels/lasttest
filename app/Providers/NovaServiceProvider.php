@@ -91,14 +91,13 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
    */
   public function tools()
   {
-
-    // return [
-    //  Novaspatiepermissions::make(),
-    //  (new \Stepanenko3\LogsTool\LogsTool())
-    //    ->canSee(fn(Request $request) => $request->user()->isRoot())
-    //    ->canDownload(fn(Request $request) => $request->user()->isRoot())
-    //    ->canDelete(fn(Request $request) => $request->user()->isRoot()),
-    // ];
+     return [
+      Novaspatiepermissions::make(),
+//      (new \Stepanenko3\LogsTool\LogsTool())
+//        ->canSee(fn(Request $request) => $request->user()->isRoot())
+//        ->canDownload(fn(Request $request) => $request->user()->isRoot())
+//        ->canDelete(fn(Request $request) => $request->user()->isRoot()),
+     ];
   }
 
   /**
@@ -111,14 +110,4 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     //
   }
 
-  private function getCostumMenu(){
-    Nova::mainMenu(function (Request $request){
-    return [
-      MenuSection::dashboard(Main::class),
-      MenuSection::make('Content', [
-        MenuItem::resource(\App\Nova\Dealer::class),
-      ])->icon('document-text')->collapsable(),
-    ];
-    });
-  }
 }

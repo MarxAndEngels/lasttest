@@ -24,7 +24,7 @@ class Dealer extends Resource
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'title';
 
     /**
      * The columns that should be searched.
@@ -58,6 +58,12 @@ class Dealer extends Resource
             ->rules('required', 'max:80')
             ->showOnPreview(),
           BelongsTo::make('User'),
+          Text::make('Дата создания','created_at')->hideWhenCreating()->hideFromIndex()->readonly(function ($request) {
+            return $request->isCreateOrAttachRequest();
+          }),
+          Text::make('Дата обновления','updated_at')->hideWhenCreating()->hideFromIndex()->readonly(function ($request) {
+            return $request->isCreateOrAttachRequest();
+          }),
         ];
     }
 

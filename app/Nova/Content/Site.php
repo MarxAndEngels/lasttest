@@ -3,7 +3,10 @@
 namespace App\Nova\Content;
 
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
+use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use App\Nova\Resource;
 
@@ -41,7 +44,18 @@ class Site extends Resource
     public function fields(NovaRequest $request)
     {
         return [
-            ID::make()->sortable(),
+          ID::make()->sortable(),
+          Images::make('Фавикон сайта', 'favicon_image'),
+//            ->showOnPreview()
+//            ->rules('required'),
+           BelongsTo::make('User'),
+           belongsTo::make('Dealer'),
+          Text::make('Дата создания','created_at')->hideWhenCreating()->hideFromIndex()->readonly(function ($request) {
+            return $request->isCreateOrAttachRequest();
+          }),
+          Text::make('Дата обновления','updated_at')->hideWhenCreating()->hideFromIndex()->readonly(function ($request) {
+            return $request->isCreateOrAttachRequest();
+          }),
         ];
     }
 
